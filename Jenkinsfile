@@ -53,5 +53,10 @@ pipeline {
                 sh 'docker push chandan3461/bankingapp-img:latest'
             }
         }
+        stage('ansible deployment') {
+            steps {
+                ansiblePlaybook credentialsId: 'ansible', installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
+            }
+        }
     }
 }
